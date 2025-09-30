@@ -1,4 +1,3 @@
-import os
 import pytest
 from pathlib import Path
 import json
@@ -92,7 +91,7 @@ def test_delete_message(client):
 
 def test_search_message(client):
     """Verify search page renders and returns matches when present."""
-    rv = client.get('/search/?query=Hello')
+    rv = client.get("/search/?query=Hello")
     assert rv.status_code == 200
     assert b"Search:" in rv.data
 
@@ -103,12 +102,12 @@ def test_search_message(client):
         follow_redirects=True,
     )
 
-    rv = client.get('/search/?query=Hello')
+    rv = client.get("/search/?query=Hello")
     assert rv.status_code == 200
     assert b"Hello" in rv.data
     assert b"This is a test" in rv.data
 
-    rv = client.get('/search/?query=Hellox')
+    rv = client.get("/search/?query=Hellox")
     assert rv.status_code == 200
     assert b"Hello" not in rv.data
     assert b"This is a test" not in rv.data
